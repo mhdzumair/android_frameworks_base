@@ -34,4 +34,9 @@
 
     <dimen name="burnin_protection_horizontal_shift">3dp</dimen>
     <dimen name="burnin_protection_vertical_shift">1dp</dimen>
+
+    <!-- Custom headers -->
+    <dimen name="qs_panel_top_offset_normal">80dp</dimen>
+    <dimen name="qs_panel_top_offset_header">110dp</dimen>
+
 </resources>
