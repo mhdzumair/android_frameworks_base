@@ -256,10 +256,11 @@
     <string name="accessibility_quick_settings_live_display_changed_night">LiveDisplay changed to night mode.</string>
     <string name="accessibility_quick_settings_live_display_changed_outdoor">LiveDisplay changed to outdoor mode.</string>
 
-    <string name="qs_menu_item_columns">Columns</string>
+    <string name="qs_menu_item_columns">Columns portrait</string>
+    <string name="qs_menu_item_columns_landscape">Columns landscape</string>
     <string name="qs_menu_item_columns_three">3</string>
     <string name="qs_menu_item_columns_four">4</string>
     <string name="qs_menu_item_columns_five">5</string>
-    <string name="qs_menu_item_reset">Reset</string>
+    <string name="qs_menu_item_columns_six">6</string>
 
 </resources>
