@@ -327,6 +327,8 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             "cmsecure:" + CMSettings.Secure.LOCKSCREEN_MEDIA_METADATA;
     private static final String SYSTEMUI_BURNIN_PROTECTION =
             "cmsystem:" + CMSettings.System.SYSTEMUI_BURNIN_PROTECTION;
+    private static final String QS_LAYOUT_COLUMNS =
+            Settings.System.QS_LAYOUT_COLUMNS;
 
     static {
         boolean onlyCoreApps;
@@ -831,7 +833,8 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                 NAVBAR_LEFT_IN_LANDSCAPE,
                 STATUS_BAR_BRIGHTNESS_CONTROL,
                 LOCKSCREEN_MEDIA_METADATA,
-                SYSTEMUI_BURNIN_PROTECTION);
+                SYSTEMUI_BURNIN_PROTECTION,
+                QS_LAYOUT_COLUMNS);
 
         // Lastly, call to the icon policy to install/update all the icons.
         mIconPolicy = new PhoneStatusBarPolicy(mContext, mIconController, mCastController,
@@ -5616,6 +5619,9 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                         mBurnInProtectionController.stopShiftTimer(true);
                     }
                 }
+                break;
+            case QS_LAYOUT_COLUMNS:
+                updateResources();
                 break;
             default:
                 break;
