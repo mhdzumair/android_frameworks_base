@@ -327,10 +327,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             "cmsecure:" + CMSettings.Secure.LOCKSCREEN_MEDIA_METADATA;
     private static final String SYSTEMUI_BURNIN_PROTECTION =
             "cmsystem:" + CMSettings.System.SYSTEMUI_BURNIN_PROTECTION;
-    private static final String QS_LAYOUT_COLUMNS =
-            Settings.System.QS_LAYOUT_COLUMNS;
-    private static final String QS_LAYOUT_COLUMNS_LANDSCAPE =
-            Settings.System.QS_LAYOUT_COLUMNS_LANDSCAPE;
 
     static {
         boolean onlyCoreApps;
@@ -593,6 +589,50 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         }
     };
 
+    class SettingsObserver extends ContentObserver {
+        SettingsObserver(Handler handler) {
+            super(handler);
+        }
+
+        void observe() {
+
+            ContentResolver resolver = mContext.getContentResolver();
+
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.QS_LAYOUT_COLUMNS),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.QS_LAYOUT_COLUMNS_LANDSCAPE),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.QS_LAYOUT_ROWS),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.QS_LAYOUT_ROWS_LANDSCAPE),
+                    false, this, UserHandle.USER_ALL);
+            update();
+        }
+
+        @Override
+        public void onChange(boolean selfChange, Uri uri) {
+            update();
+        }
+
+        void unobserve() {
+            ContentResolver resolver = mContext.getContentResolver();
+            resolver.unregisterContentObserver(this);
+        }
+
+        public void update() {
+            if (mQSPanel != null) {
+                updateResources();
+            }
+            if (mHeader != null) {
+                mHeader.updateSettings();
+            }
+        }
+    }
+
     private int mInteractingWindows;
     private boolean mAutohideSuspended;
     private int mStatusBarMode;
@@ -835,9 +875,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                 NAVBAR_LEFT_IN_LANDSCAPE,
                 STATUS_BAR_BRIGHTNESS_CONTROL,
                 LOCKSCREEN_MEDIA_METADATA,
-                SYSTEMUI_BURNIN_PROTECTION,
-                QS_LAYOUT_COLUMNS,
-                QS_LAYOUT_COLUMNS_LANDSCAPE);
+                SYSTEMUI_BURNIN_PROTECTION);
 
         // Lastly, call to the icon policy to install/update all the icons.
         mIconPolicy = new PhoneStatusBarPolicy(mContext, mIconController, mCastController,
@@ -871,6 +909,9 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
 
         mScreenPinningRequest = new ScreenPinningRequest(mContext);
         mFalsingManager = FalsingManager.getInstance(mContext);
+
+        SettingsObserver observer = new SettingsObserver(mHandler);
+        observer.observe();
     }
 
     protected void createIconController() {
@@ -5622,10 +5663,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                         mBurnInProtectionController.stopShiftTimer(true);
                     }
                 }
-                break;
-            case QS_LAYOUT_COLUMNS:
-            case QS_LAYOUT_COLUMNS_LANDSCAPE:
-                updateResources();
                 break;
             default:
                 break;

@@ -469,7 +469,7 @@ public class TileAdapter extends RecyclerView.Adapter<Holder> implements TileSta
             mColumns = columns;
         }
     }
-    private final DarkSpanSizeLookup mSizeLookup = new OmniSpanSizeLookup();
+    private final DarkSpanSizeLookup mSizeLookup = new DarkSpanSizeLookup();
 
     private class TileItemDecoration extends ItemDecoration {
         private final ColorDrawable mDrawable;
