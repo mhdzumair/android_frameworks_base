@@ -3819,6 +3819,12 @@ public final class Settings {
         public static final String SYSTEMUI_RECENTS_MEM_DISPLAY = "systemui_recents_mem_display";
 
         /**
+         * Remove conditions in settings
+         * @hide
+         */
+        public static final String DISABLE_SETTINGS_CONDITIONS = "disable_settings_conditions";
+
+        /**
          * Recents lock icon
          * @hide
          */
