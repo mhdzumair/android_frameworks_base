@@ -823,5 +823,61 @@ public class AudioSystem
      * Keep in sync with core/jni/android_media_DeviceCallback.h.
      */
     final static int NATIVE_EVENT_ROUTING_CHANGE = 1000;
+
+    /// zormax: Add for support EM
+    /**
+     * Set EM parameter.
+     *
+     * @param ptr The data to be set.
+     * @param length The data size.
+     * @return The status.
+     */
+    public static native int setEmParameter(byte[] ptr, int length);
+
+    /**
+     * Get EM parameter.
+     *
+     * @param ptr The data to be get.
+     * @param length The data size.
+     * @return The status.
+     */
+    public static native int getEmParameter(byte[] ptr, int length);
+
+    /**
+     * Set audio command.
+     *
+     * @param arg1 The first argument.
+     * @param arg2 The second argument.
+     * @return The status.
+     */
+    public static native int setAudioCommand(int arg1, int arg2);
+
+    /**
+     * Get audio command.
+     *
+     * @param arg1 The first argument.
+     * @return The status.
+     */
+    public static native int getAudioCommand(int arg1);
+
+    /**
+     * Set audio data.
+     *
+     * @param par1 The par1.
+     * @param len The length.
+     * @param ptr The array of audio data.
+     * @return The status.
+     */
+    public static native int setAudioData(int par1, int len, byte[] ptr);
+
+    /**
+     * Get audio data.
+     *
+     * @param par1 The par1.
+     * @param len The length of data..
+     * @param ptr The array to receive audio data.
+     * @return The status.
+     */
+    public static native int getAudioData(int par1, int len, byte[] ptr);
 }
 

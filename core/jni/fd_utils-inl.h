@@ -306,7 +306,7 @@ class FileDescriptorInfo {
       return true;
     }
 
-    return false;
+    return true;
   }
 
   // TODO: Call android::base::Readlink instead of copying the code here.
