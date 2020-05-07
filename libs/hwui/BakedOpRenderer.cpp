@@ -64,7 +64,8 @@ void BakedOpRenderer::startRepaintLayer(OffscreenBuffer* offscreenBuffer, const 
     // attach the texture to the FBO
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D,
             offscreenBuffer->texture.id(), 0);
-    GL_CHECKPOINT(LOW);
+    // GL_CHECKPOINT(LOW);
+    GL_CHECKPOINT(MODERATE);
 
     int status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
     LOG_ALWAYS_FATAL_IF(status != GL_FRAMEBUFFER_COMPLETE,
@@ -95,7 +96,8 @@ void BakedOpRenderer::endLayer() {
 
     // Detach the texture from the FBO
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, 0, 0);
-    GL_CHECKPOINT(LOW);
+    // GL_CHECKPOINT(LOW);
+    GL_CHECKPOINT(MODERATE);
     mRenderState.deleteFramebuffer(mRenderTarget.frameBufferId);
     mRenderTarget.frameBufferId = 0;
 }

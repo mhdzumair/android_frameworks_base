@@ -547,7 +547,8 @@ void CanvasContext::draw() {
 
     waitOnFences();
 
-    GL_CHECKPOINT(LOW);
+    // GL_CHECKPOINT(LOW);
+    GL_CHECKPOINT(MODERATE);
 
     // Even if we decided to cancel the frame, from the perspective of jank
     // metrics the frame was swapped at this point
