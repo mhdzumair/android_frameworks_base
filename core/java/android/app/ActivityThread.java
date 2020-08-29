@@ -5592,7 +5592,6 @@ public final class ActivityThread {
             }
         }
         if (holder == null) {
-            Slog.e(TAG, "Failed to find provider info for " + auth);
             return null;
         }
 
